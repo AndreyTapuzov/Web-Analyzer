@@ -1,0 +1,95 @@
+﻿body {
+    padding-top: 0px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea{
+    margin-left: 10px;
+    vertical-align:central;
+}
+
+/*menu styles*/
+.menu-container {
+    position: relative;
+    height: 60px;
+    padding: 10px;
+}
+.route-link {
+    position: absolute;
+
+}
+
+/*body styles*/
+
+.main-body-content {
+    margin: 0 auto;
+    width: 90%;
+}
+
+td, th {
+    text-align: center !important;
+}
+
+#limitation-textbox {
+    
+}
+
+.pointer-cursor {
+    cursor: pointer;
+}
+
+.display-view {
+    margin-top: 20px;
+}
+
+.table-container {
+    position: relative;
+    height: 500px;
+    overflow-y: auto;
+}
+
+.validation-summary-errors ul {
+    list-style: none;
+}
+
+
+.btn-inner-item {
+    padding: 0;
+    margin: 5px;
+}
+
+img.btn-inner-item {
+    height: 20px;
+    width: 20px;
+}
+
+table.form-table {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+table.form-table td {
+    text-align: left !important;
+    padding: 10px; 
+}
+
+table.form-table input[type="text"] {
+    width: 400px;
+}
+
+.link-td {
+    max-width: 450px !important;
+}
+
+#loading-container {
+    display: none;
+}

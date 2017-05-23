@@ -1,0 +1,52 @@
+﻿@model WebAnalyzer.Models.ViewModels.AnalysisDataViewModel
+
+@if (ViewBag.ResultMessage != null)
+{
+    <div class="result-message">
+        @ViewBag.ResultMessage
+    </div>
+}
+
+@if (Model?.ResponseData != null)
+{
+    <h3>
+        Results for @Model.Url
+    </h3>
+
+    <div class="display-view">Total analyzed pages: <span class="important-info-text">@Model.ResponseData.Count</span></div>
+
+    <div class="display-view chart-container">
+        <div id="chartContainer"></div>
+    </div>
+
+    <div class="display-view table-container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>@Html.LabelFor(m => m.ResponseData.First().Place)</th>
+                    <th>@Html.LabelFor(m => m.ResponseData.First().ElapsedTime)</th>
+                    <th>@Html.LabelFor(m => m.ResponseData.First().RequestUrl)</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var data in Model.ResponseData)
+                {
+                    <tr>
+                        <td>@data.Place</td>
+                        <td>@data.ElapsedTime.TotalSeconds</td>
+                        <td class="link-td"><a href="@data.RequestUrl" target="_blank">@data.RequestUrl</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
+<script src="~/Scripts/Custom/chart-scripts.js"></script>
+
+<script type="text/javascript">
+    renderChart(@Html.Raw(Model?.SerializedData));
+</script>
+
+<script src="~/Scripts/Custom/MainPageScripts.js"></script>

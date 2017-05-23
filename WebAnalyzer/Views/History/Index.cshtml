@@ -1,0 +1,68 @@
+﻿@using PagedList.Mvc;
+
+@model PagedList.IPagedList<WebAnalyzer.Models.ViewModels.AnalyzedWebSiteViewModel>
+
+@{
+    ViewBag.Title = "History";
+}
+<div class="main-body-content">
+    @section routeLink
+    {
+        <div class="route-link">
+            <a href="@Url.Action("Index", "Home")" class="btn btn-default">
+                <img alt="Main page image" class="btn-inner-item" src="@Url.Content("~/Content/Images/back-icon.png")">
+                <span class="btn-inner-item">Main page</span>
+            </a>
+        </div>
+    }
+
+    <div class="text-center">
+        <h3>All results</h3>
+
+        @if (Model == null || Model.Count == 0)
+        {
+            <div class="result-message">
+                History is empty
+            </div>
+        }
+        else
+        {
+            <div class="display-view">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>@Html.LabelFor(m => m.First().URL)</th>
+                            <th>@Html.LabelFor(m => m.First().RequestTime)</th>
+                            <th>@Html.LabelFor(m => m.First().CountPages)</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @{
+                            foreach (var request in Model.ToList())
+                            {
+                                <tr>
+                                    <td>@((Model.PageSize * (Model.PageNumber - 1)) + (Model.ToList().IndexOf(request) + 1))</td>
+                                    <td>@request.URL</td>
+                                    <td>@(request.RequestTime.ToShortDateString() + " : " + request.RequestTime.ToShortTimeString())</td>
+                                    <td>@request.CountPages</td>
+                                    <td>@Html.ActionLink("View", "ViewHistory", "History", new { requestId = request.Id }, new { @class = "btn btn-info" })</td>
+                                </tr>
+                            }
+                        }
+
+                    </tbody>
+                </table>
+                <br />
+                Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+                @Html.PagedListPager(Model, page => Url.Action("Index",
+                    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+            </div>
+        }
+
+
+    </div>
+</div>
